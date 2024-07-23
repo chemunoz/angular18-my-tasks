@@ -15,7 +15,7 @@ export class TasksListComponent {
   selectedFilter = signal<string>('all');
   tasks = this.#taskService.allTasks;
 
-  onChangeTasksFilter(filter: string) {
+  onChangeTasksFilter(filter: string): void {
     this.selectedFilter.set(filter);
   }
 }

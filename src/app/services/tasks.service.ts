@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Task } from '../tasks/task.model';
+import { Task, TaskStatus } from '../tasks/task.model';
 import { NewTask } from '../tasks/interfaces/new-task.interface';
 
 @Injectable({
@@ -18,5 +18,9 @@ export class TasksService {
     this.#tasks.update((tasks) => [...tasks, newTask]);
   }
 
-  constructor() {}
+  updateTaskStatus(id: string, status: TaskStatus): void {
+    this.#tasks.update((tasks) =>
+      tasks.map((task) => (task.id === id ? { ...task, status } : task))
+    );
+  }
 }

@@ -13,7 +13,7 @@ export class NewTaskComponent {
   private formEl = viewChild<ElementRef<HTMLFormElement>>('form');
   #taskService = inject(TasksService);
 
-  onAddTask(title: string, description: string) {
+  onAddTask(title: string, description: string): void {
     this.#taskService.addTask({ title, description });
     this.formEl()?.nativeElement.reset();
   }
