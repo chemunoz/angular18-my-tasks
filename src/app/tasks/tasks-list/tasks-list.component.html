@@ -2,10 +2,10 @@
   <h2>My Tasks</h2>
   <p>
     <select (change)="onChangeTasksFilter(filter.value)" #filter>
-      <option value="all">All</option>
-      <option value="open">Open</option>
-      <option value="in-progress">In-Progress</option>
-      <option value="done">Completed</option>
+      <option value="{{ taskListFilter.ALL }}">All</option>
+      <option value="{{ taskListFilter.OPEN }}">Open</option>
+      <option value="{{ taskListFilter.IN_PROGRESS }}">In-Progress</option>
+      <option value="{{ taskListFilter.DONE }}">Completed</option>
     </select>
   </p>
 </header>

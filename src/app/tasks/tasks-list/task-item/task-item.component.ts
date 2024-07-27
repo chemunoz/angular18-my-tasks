@@ -1,24 +1,31 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { Task, TaskStatus } from '../../task.model';
+import { TaskListFilter } from '../task-list-filter.enum';
+import { TitleCasePipe } from '@angular/common';
+import { TasksService } from '@app/services/tasks.service';
 
 @Component({
   selector: 'app-task-item',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TitleCasePipe],
   templateUrl: './task-item.component.html',
   styleUrl: './task-item.component.css',
 })
 export class TaskItemComponent {
   task = input.required<Task>();
+  taskListFilter = TaskListFilter;
+
+  #taskService = inject(TasksService);
+
   taskStatus = computed(() => {
     switch (this.task().status) {
-      case 'OPEN':
+      case this.taskListFilter.OPEN:
         return 'Open';
-      case 'IN_PROGRESS':
+      case this.taskListFilter.IN_PROGRESS:
         return 'Working on it';
-      case 'DONE':
+      case this.taskListFilter.DONE:
         return 'Completed';
       default:
         return 'Open';
@@ -26,20 +33,22 @@ export class TaskItemComponent {
   });
 
   onChangeTaskStatus(taskId: string, status: string) {
-    let newStatus: TaskStatus = 'OPEN';
+    let newStatus: TaskStatus = this.taskListFilter.OPEN;
 
     switch (status) {
-      case 'open':
-        newStatus = 'OPEN';
+      case this.taskListFilter.OPEN:
+        newStatus = this.taskListFilter.OPEN;
         break;
-      case 'in-progress':
-        newStatus = 'IN_PROGRESS';
+      case this.taskListFilter.IN_PROGRESS:
+        newStatus = this.taskListFilter.IN_PROGRESS;
         break;
-      case 'done':
-        newStatus = 'DONE';
+      case this.taskListFilter.DONE:
+        newStatus = this.taskListFilter.DONE;
         break;
       default:
         break;
     }
+
+    this.#taskService.updateTaskStatus(taskId, newStatus);
   }
 }
