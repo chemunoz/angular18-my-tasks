@@ -1,4 +1,4 @@
-export enum TaskListFilter {
+export enum TaskStatusOptions {
   ALL = 'ALL',
   OPEN = 'OPEN',
   DONE = 'DONE',

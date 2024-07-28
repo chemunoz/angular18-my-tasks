@@ -1,8 +1,8 @@
 <article
   [class]="{
-    'status-open': task().status === taskListFilter.OPEN,
-    'status-in-progress': task().status === taskListFilter.IN_PROGRESS,
-    'status-done': task().status === taskListFilter.DONE
+    'status-open': task().status === taskStatusOptions.OPEN,
+    'status-in-progress': task().status === taskStatusOptions.IN_PROGRESS,
+    'status-done': task().status === taskStatusOptions.DONE
   }"
 >
   <header>
@@ -13,22 +13,22 @@
   <form (ngSubmit)="onChangeTaskStatus(task().id, status.value)">
     <select #status>
       <option
-        value="{{ taskListFilter.OPEN }}"
-        [selected]="task().status === taskListFilter.OPEN"
+        value="{{ taskStatusOptions.OPEN }}"
+        [selected]="task().status === taskStatusOptions.OPEN"
       >
-        {{ taskListFilter.OPEN | titlecase }}
+        {{ taskStatusOptions.OPEN | titlecase }}
       </option>
       <option
-        value="{{ taskListFilter.IN_PROGRESS }}"
-        [selected]="task().status === taskListFilter.IN_PROGRESS"
+        value="{{ taskStatusOptions.IN_PROGRESS }}"
+        [selected]="task().status === taskStatusOptions.IN_PROGRESS"
       >
-        {{ taskListFilter.IN_PROGRESS | titlecase }}
+        {{ taskStatusOptions.IN_PROGRESS | titlecase }}
       </option>
       <option
-        value="{{ taskListFilter.DONE }}"
-        [selected]="task().status === taskListFilter.DONE"
+        value="{{ taskStatusOptions.DONE }}"
+        [selected]="task().status === taskStatusOptions.DONE"
       >
-        {{ taskListFilter.DONE | titlecase }}
+        {{ taskStatusOptions.DONE | titlecase }}
       </option>
     </select>
     <p>

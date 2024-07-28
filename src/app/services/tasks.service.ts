@@ -1,8 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Task, TaskStatus } from '../tasks/task.model';
 import { NewTask } from '../tasks/interfaces/new-task.interface';
-import { LoggingService } from './logging.service';
-import { TaskListFilter } from '@app/tasks/tasks-list/task-list-filter.enum';
+import { LoggingService } from '@services/logging.service';
+import { TaskStatusOptions } from '@app/tasks/tasks-list/task-list-filter.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class TasksService {
     const newTask: Task = {
       ...task,
       id: Math.random().toString(),
-      status: TaskListFilter.OPEN,
+      status: TaskStatusOptions.OPEN,
     };
     this.#tasks.update((tasks) => [...tasks, newTask]);
     this.#loggingService.log(`Task added: ${newTask.title}`);
