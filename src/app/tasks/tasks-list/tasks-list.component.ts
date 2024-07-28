@@ -38,7 +38,7 @@ export class TasksListComponent {
     }
   });
 
-  onChangeTasksFilter(filter: TaskListFilter): void {
-    this.#selectedFilter.set(filter);
+  onChangeTasksFilter(filter: string): void {
+    this.#selectedFilter.set(filter as TaskListFilter);
   }
 }
